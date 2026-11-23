@@ -20,9 +20,6 @@ function Hero() {
           <figure className="col-span-6 aspect-[687/720] overflow-hidden lg:absolute lg:right-[5.85%] lg:top-[390px] lg:w-[53.7%]">
             <img src={img("gold-pearl-cake.png")} alt="White frosted layer cake with gold pearl decorations and a slice revealing the sponge layers" className="h-full w-full object-cover" />
           </figure>
-          <figure className="col-span-4 aspect-[416/498] overflow-hidden lg:absolute lg:left-[60px] lg:top-[538px] lg:w-[32.5%]">
-            <img src={img("cupcake-hero.jpg")} alt="Saima vegan cupcakes with swirled frosting" className="h-full w-full object-cover" />
-          </figure>
         </div>
       </div>
     </section>
@@ -31,9 +28,8 @@ function Hero() {
 
 function Story() {
   return (
-    <section id="story" className="grid items-center gap-12 px-5 py-20 md:grid-cols-2 md:gap-[8%] md:px-[60px] md:py-[140px]">
-      <img src={img("layer-cake.jpg")} alt="A Saima vegan chocolate layer cake" className="aspect-[4/5] w-full object-cover" loading="lazy" />
-      <div className="max-w-[460px]">
+    <section id="story" className="px-5 py-20 md:px-[60px] md:py-[140px]">
+      <div className="max-w-[720px]">
         <h2 className={H2}>Handcrafted Cakes,<br />Made Locally</h2>
         <p className="mt-6">
           Saima is a small neighbourhood bakery on NIBM Road in Pune. Every cake, cupcake, brownie and chocolate we make is 100% vegan and eggless: no eggs, no butter, no dairy cream.
