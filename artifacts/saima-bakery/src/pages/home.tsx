@@ -157,6 +157,16 @@ export default function Home() {
       <Delivery />
       <Band />
       <Facts />
+      <figure className="mb-12 w-full md:mb-[100px]">
+        <img
+          src={img("rose-ribbon-cake.png")}
+          alt="White celebration cake decorated with a red rose, delicate white flowers and a red ribbon"
+          width={697}
+          height={631}
+          className="aspect-[697/631] w-full object-cover md:aspect-[16/9]"
+          loading="lazy"
+        />
+      </figure>
       <Behind />
     </Shell>
   );
