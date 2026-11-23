@@ -18,7 +18,7 @@ function Hero() {
         </div>
         <div className="mt-12 grid grid-cols-6 gap-4 lg:mt-0 lg:block">
           <figure className="col-span-6 aspect-[687/720] overflow-hidden lg:absolute lg:right-[5.85%] lg:top-[390px] lg:w-[53.7%]">
-            <img src={img("chocolate-cake.jpg")} alt="A Saima vegan chocolate cake piped with music notes and red roses" className="h-full w-full object-cover" />
+            <img src={img("gold-pearl-cake.png")} alt="White frosted layer cake with gold pearl decorations and a slice revealing the sponge layers" className="h-full w-full object-cover" />
           </figure>
           <figure className="col-span-4 aspect-[416/498] overflow-hidden lg:absolute lg:left-[60px] lg:top-[538px] lg:w-[32.5%]">
             <img src={img("cupcake-hero.jpg")} alt="Saima vegan cupcakes with swirled frosting" className="h-full w-full object-cover" />
