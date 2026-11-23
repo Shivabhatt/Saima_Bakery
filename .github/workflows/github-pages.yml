@@ -1,0 +1,71 @@
+name: Build Saima Bakery for GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the verified build to the gh-pages branch
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: saima-github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run typecheck:libs
+      - run: pnpm --filter @workspace/saima-bakery run typecheck
+      - name: Build website
+        env:
+          NODE_ENV: production
+          PORT: "5000"
+          BASE_PATH: /${{ github.event.repository.name }}/
+        run: pnpm --filter @workspace/saima-bakery run build
+      - name: Prepare static routes
+        run: |
+          site=artifacts/saima-bakery/dist/public
+          mkdir -p "$site/menu"
+          cp "$site/index.html" "$site/menu/index.html"
+          cp "$site/index.html" "$site/404.html"
+          touch "$site/.nojekyll"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: github-pages-site
+          path: artifacts/saima-bakery/dist/public
+          include-hidden-files: true
+          retention-days: 14
+  publish:
+    if: github.event_name == 'workflow_dispatch' && inputs.publish
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: github-pages-site
+          path: public
+      - name: Publish gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: public
+          publish_branch: gh-pages
